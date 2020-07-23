@@ -17,13 +17,27 @@
  * Define Global Variables
  * 
 */
+const sections = Array.from(document.querySelectorAll("section"));
+let navBar = [];
 
-
+// console.log(sections);
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
+
+function getNameNav (){
+    i = 0;
+    for (sec of sections){
+        navBar.push(sections[i].dataset.nav);
+        i++;
+    }
+}
+
+getNameNav();
+console.log(navBar);
+
 
 
 
@@ -34,6 +48,10 @@
 */
 
 // build the nav
+
+
+
+
 
 
 // Add class 'active' to section when near top of viewport
