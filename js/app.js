@@ -54,10 +54,13 @@ console.log(sections[0]);
 // build the nav
 
 function buildMenu(){
+    i = 1;
     for (const name of navbar){
               
-        navbarList.insertAdjacentHTML("beforeend","<li class=menu__link><a href='#'>"+ name + "</a></li>");
-        console.log(name);
+        // navbarList.insertAdjacentHTML("beforeend","<li class=menu__link><a href='#'>"+ name + "</a></li>");
+        navbarList.insertAdjacentHTML("beforeend",`<li class=menu__link><a href='#section${i}'> ${name} </a></li>`);
+        i++
+
     }
 }
 
