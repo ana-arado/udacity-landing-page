@@ -18,9 +18,13 @@
  * 
 */
 const sections = Array.from(document.querySelectorAll("section"));
-let navBar = [];
+let navbar = [];
+const navbarList = document.querySelector("#navbar__list");
+let id1 = sections[0].id;
 
-// console.log(sections);
+
+
+console.log(id1);
 /**
  * End Global Variables
  * Start Helper Functions
@@ -30,13 +34,13 @@ let navBar = [];
 function getNameNav (){
     i = 0;
     for (sec of sections){
-        navBar.push(sections[i].dataset.nav);
+        navbar.push(sections[i].dataset.nav);
         i++;
     }
 }
 
 getNameNav();
-console.log(navBar);
+console.log(sections[0]);
 
 
 
@@ -49,10 +53,15 @@ console.log(navBar);
 
 // build the nav
 
+function buildMenu(){
+    for (const name of navbar){
+              
+        navbarList.insertAdjacentHTML("beforeend","<li class=menu__link><a href='#'>"+ name + "</a></li>");
+        console.log(name);
+    }
+}
 
-
-
-
+buildMenu();
 
 // Add class 'active' to section when near top of viewport
 
