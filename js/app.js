@@ -20,11 +20,11 @@
 const sections = Array.from(document.querySelectorAll("section"));
 let navbar = [];
 const navbarList = document.querySelector("#navbar__list");
-let id1 = sections[0].id;
+let isActive = null;
+const mainCont = document.querySelector("main");
 
 
-
-console.log(id1);
+console.log(sections);
 /**
  * End Global Variables
  * Start Helper Functions
@@ -33,7 +33,7 @@ console.log(id1);
 
 function getNameNav (){
     i = 0;
-    for (sec of sections){
+    for (const sec of sections){
         navbar.push(sections[i].dataset.nav);
         i++;
     }
@@ -56,17 +56,38 @@ console.log(sections[0]);
 function buildMenu(){
     i = 1;
     for (const name of navbar){
-              
-        // navbarList.insertAdjacentHTML("beforeend","<li class=menu__link><a href='#'>"+ name + "</a></li>");
-        navbarList.insertAdjacentHTML("beforeend",`<li class="menu__link"><a href='#section${i}'> ${name} </a></li>`);
+        navbarList.insertAdjacentHTML("beforeend",`<li><a class="menu__link" data-nav="Section ${i}" href='#section${i}'> ${name} </a></li>`);
         i++
-
     }
 }
 
 buildMenu();
 
 // Add class 'active' to section when near top of viewport
+
+window.addEventListener('scroll', function(){
+    let activeSection = null
+// Determines which is the active section
+    for (const sec of sections) {
+	    const bottom = sec.getBoundingClientRect().bottom
+	    if (!activeSection && bottom > window.innerHeight * 0.3) {
+            activeSection = sec
+
+	    }
+    }
+// Changes the classes when active section changes
+    if (activeSection.dataset.nav != isActive){
+        // Removes classes
+        navbarList.querySelector(".your-active-class-nav")?.classList.remove('your-active-class-nav');
+        mainCont.querySelector('.your-active-class').classList.remove('your-active-class');
+        // Adds classes to active
+        activeSection.classList.add('your-active-class');
+        const navActive = navbarList.querySelector(`[data-nav="${activeSection.dataset.nav}"]`);
+        navActive.classList.add("your-active-class-nav");
+        // Persists active
+        isActive = activeSection.dataset.nav;
+    }
+});
 
 
 // Scroll to anchor ID using scrollTO event
